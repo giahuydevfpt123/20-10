@@ -34,8 +34,6 @@
       justify-content: center;
       padding: calc(env(safe-area-inset-top) + 20px) 16px calc(env(safe-area-inset-bottom) + 20px) 16px;
       overflow-x: hidden;
-      user-select: none;
-      -webkit-user-select: none;
     }
 
     /* Sticker rơi lơ lửng nền */
@@ -45,6 +43,8 @@
       pointer-events: none;
       animation: fall linear infinite;
       z-index: 1;
+      user-select: none;
+      -webkit-user-select: none;
     }
     @keyframes fall {
       0% { transform: translateY(0) rotate(0deg); opacity: 0; }
@@ -74,6 +74,8 @@
       -webkit-backdrop-filter: blur(8px);
       z-index: 100;
       transition: transform 0.2s;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .music-btn:active { transform: scale(0.95); }
     .spinning { animation: spin 3s linear infinite; }
@@ -104,6 +106,8 @@
       margin-bottom: 8px;
       display: inline-block;
       animation: bounce 2s infinite ease-in-out;
+      user-select: none;
+      -webkit-user-select: none;
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
@@ -115,6 +119,8 @@
       font-weight: 800;
       color: var(--text-dark);
       margin-bottom: 16px;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .input-code {
@@ -131,6 +137,8 @@
       margin-bottom: 12px;
       transition: all 0.2s;
       -webkit-appearance: none;
+      user-select: text;
+      -webkit-user-select: text;
     }
     .input-code:focus {
       border-color: var(--pink);
@@ -150,6 +158,8 @@
       cursor: pointer;
       box-shadow: 0 6px 18px rgba(255, 77, 109, 0.35);
       transition: transform 0.15s;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .btn-open:active { transform: scale(0.97); }
 
@@ -161,6 +171,8 @@
       margin-top: 8px;
       opacity: 0;
       transition: opacity 0.2s;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .err.show { opacity: 1; }
 
@@ -193,6 +205,8 @@
       max-width: 270px;
       transform: rotate(-1.5deg);
       transition: transform 0.25s ease;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .photo-polaroid:hover {
       transform: rotate(0deg) scale(1.02);
@@ -228,6 +242,8 @@
       color: var(--pink);
       text-align: right;
       margin-bottom: 16px;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .btn-close {
@@ -241,6 +257,8 @@
       cursor: pointer;
       width: 100%;
       transition: background 0.15s;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .btn-close:active { background: #e2e8f0; transform: scale(0.98); }
   </style>
@@ -269,8 +287,8 @@
         class="input-code" 
         placeholder="Nhập mật mã được cấp trên thiệp" 
         autocomplete="off"
-        inputmode="numeric"
-        pattern="[0-9]*"
+        autocapitalize="none"
+        spellcheck="false"
         onkeydown="if(event.key === 'Enter') unlock()"
       >
       <button class="btn-open" onclick="unlock()">Mở Thư 🌸</button>
@@ -399,7 +417,7 @@
     // 🌸 DANH SÁCH 10 BỨC THƯ (1 ĐẾN 7: KTX | 8: CÔ GIÁO | 9 & 10: BẠN CÙNG LỚP)
     const letters = {
       // --- 7 CHỊ KTX ---
-      "18052007": {
+      "Huonggiang": {
         name: "Chị Giang 🌷",
         img: "anh1.jpg",
         wish: "Chào chị, chưa có quà gì to tát ngoài chút lòng thành này. Chúc chị 20/10 thật nhiều niềm vui, sức khỏe dồi dào, deadline nào cũng qua êm đẹp và không rớt môn nhé, túi tiền rủng rỉnh luôn nha!",
@@ -444,7 +462,7 @@
 
       // --- CÔ GIÁO ---
       "coquynhxinhgai": {
-      name: "Cô Quỳnh kính yêu 💐",
+        name: "Cô Quỳnh kính yêu 💐",
         img: "anh8.jpg",
         wish: "Nhân ngày Phụ nữ Việt Nam 20/10, chúng em xin kính chúc Cô luôn dồi dào sức khỏe, luôn tươi trẻ, tràn đầy nhiệt huyết và hạnh phúc bên gia đình! Cảm ơn Cô vì sự tận tâm, dìu dắt và truyền cảm hứng cho chúng em trong từng tiết học ạ!",
         sender: "— Kính chúc Cô / Tập thể chúng em 🌸 —"
@@ -478,7 +496,6 @@
         const item = letters[code];
         errorMsg.classList.remove("show");
 
-        // Đổ ảnh, tên, lời chúc và người gửi tương ứng
         document.getElementById("viewImg").src = item.img;
         document.getElementById("viewName").innerText = item.name;
         document.getElementById("viewWish").innerText = item.wish;
